@@ -6,8 +6,8 @@
 #define led_vermelho 40 // Pino led vermelho
 #define led_amarelo 9   // Pino led amarelo
 
-#define buttonPin 1     // Pino botão
-bool buttonState = 0;   // Estado do botão
+#define buttonPin 35     // Pino botão
+bool buttonState = HIGH;   // Estado do botão
 long lastDebounceTime = 0;
 
 
@@ -23,7 +23,7 @@ void setup() {
   pinMode(led_amarelo,OUTPUT);
 
   // Inicialização das entradas
-  pinMode(buttonPin, INPUT);
+  pinMode(buttonPin, INPUT_PULLDOWN);
 
   // digitalWrite(led_azul, LOW);
   digitalWrite(led_verde, LOW);
@@ -42,7 +42,7 @@ void setup() {
 
   // Verifica estado do botão
   buttonState = digitalRead(buttonPin);
-  if (buttonState == 1) {
+  if (buttonState == HIGH) {
     Serial.println("Botão pressionado!");
   } else {
     Serial.println("Botão não pressionado!");
@@ -77,6 +77,14 @@ void setup() {
 
 void loop() {
   int ldrstatus = analogRead(ldrPin);
+
+  // Verifica estado do botão
+  buttonState = digitalRead(buttonPin);
+  if (buttonState == HIGH) {
+    Serial.println("Botão pressionado!");
+  } else {
+    Serial.println("Botão não pressionado!");
+  }
 
   // Modo Noturno
   if(ldrstatus >= threshold){
