@@ -23,7 +23,7 @@ void setup() {
   pinMode(led_amarelo,OUTPUT);
 
   // Inicialização das entradas
-  pinMode(buttonPin, INPUT_PULLDOWN);
+  pinMode(buttonPin, INPUT);
 
   // digitalWrite(led_azul, LOW);
   digitalWrite(led_verde, LOW);
@@ -42,7 +42,7 @@ void setup() {
 
   // Verifica estado do botão
   buttonState = digitalRead(buttonPin);
-  if (buttonState == HIGH) {
+  if (buttonState == LOW) {
     Serial.println("Botão pressionado!");
   } else {
     Serial.println("Botão não pressionado!");
@@ -80,7 +80,7 @@ void loop() {
 
   // Verifica estado do botão
   buttonState = digitalRead(buttonPin);
-  if (buttonState == HIGH) {
+  if (buttonState == LOW) {
     Serial.println("Botão pressionado!");
   } else {
     Serial.println("Botão não pressionado!");
@@ -111,7 +111,7 @@ void loop() {
 
     // Debounce do botão
     if ( (millis() - lastDebounceTime) > 50) {
-      if ( (buttonState == HIGH) && (led_vermelho == HIGH) ) {
+      if ( (buttonState == LOW) && (led_vermelho == HIGH) ) {
         delay(1000);
         digitalWrite(led_vermelho, LOW);
         digitalWrite(led_verde, HIGH);
